@@ -12,14 +12,13 @@ public class GenericMaze
 	static final String GOAL_STRING_INDICATOR = GenericConfigParser.confGetProperty("maze.end");
 	//Constants End
 
-	protected int startPosX; //start position on X AXIS of the maze table
-	protected int startPosY; //start position on Y AXIS of the maze table
-	protected int goalPosX; //end position on X AXIS of the maze table
-	protected int goalPosY; //end position on Y AXIS of the maze table
-	protected int mazeWidth; //Contains maze width. used for validation or moving
-	protected int mazeHeight; //Contains maze height. used for validation or moving
-	
-	public static int[][] mazeMap; 
+	private int startPosX; //start position on X AXIS of the maze table
+	private int startPosY; //start position on Y AXIS of the maze table
+	private int goalPosX; //end position on X AXIS of the maze table
+	private int goalPosY; //end position on Y AXIS of the maze table
+	private int mazeWidth; //Contains maze width. used for validation or moving
+	private int mazeHeight; //Contains maze height. used for validation or moving
+	private static int[][] mazeMap; 
 	
 	public static void main(String[] args) 
 	{
@@ -103,7 +102,7 @@ public class GenericMaze
 	}
 	
 	//Constructor of the maze
-	protected GenericMaze (String[][] inputMazeMap)
+	public GenericMaze (String[][] inputMazeMap)
 	{ 
 		this.mazeWidth = inputMazeMap[0].length;
 		this.mazeHeight = inputMazeMap.length;
@@ -139,30 +138,101 @@ public class GenericMaze
 		}	
 		//end initiliaze maze array and start,end position 	
 	}
-	
-	//function for setting starting position coordinates
-	protected void setStartPos (int xPos, int yPos)
+
+	//setter of startPosX
+	private void setStartPosX(int xPos)
 	{
 		this.startPosX = xPos;
+	}
+	
+	//getter of startPosX
+	public int getStartPosX()
+	{
+		return this.startPosX;
+	}	
+	
+	//setter of startPosY
+	private void setStartPosY(int yPos)
+	{
 		this.startPosY = yPos;
 	}
 	
+	//getter of startPosY
+	public int getStartPosY()
+	{
+		return this.startPosY;
+	}		
+	
+	//setter of goalPosX
+	private void setGoalPosX(int xPos)
+	{
+		this.goalPosX = xPos;
+	}
+	
+	//getter of goalPosX
+	public int getGoalPosX()
+	{
+		return this.goalPosX;
+	}		
+	
+	//setter of goalPosY
+	private void setGoalPosY(int yPos)
+	{
+		this.goalPosY = yPos;
+	}
+	
+	//getter of goalPosY
+	public int getGoalPosY()
+	{
+		return this.goalPosY;
+	}		
+
 	//function for setting goal position coordinates
-	protected void setGoalPos (int xPos, int yPos)
+	private void setGoalPos(int xPos, int yPos)
 	{
 		this.goalPosX = xPos;
 		this.goalPosY = yPos;
 	}
+	
+	//getter of mazeWidth
+	public int getMazeWidth()
+	{
+		return this.mazeWidth;
+	}	
 
+	//getter of mazeHeight
+	public int getMazeHeight()
+	{
+		return this.mazeHeight;
+	}	
+	
+	//sets the value of a scpecific cell of the maze
+	public int getMazeCellValue(int x, int y)
+	{
+		return this.mazeMap[x][y];
+	}	
+	
+	//sets the value of a scpecific cell of the maze
+	public void setMazeCellValue(int x, int y, int val)
+	{
+		this.mazeMap[x][y] = val;
+	}
+	
+	//increment a cell value by one
+	public void incrementCellValue(int x, int y)
+	{
+		this.mazeMap[x][y]++;
+	}	
+	
 	//sets the array dimmensions
-	protected void setArrayDimmensions (int width, int height)
+	private void setArrayDimmensions(int width, int height)
 	{
 		this.mazeWidth = width;
 		this.mazeHeight = height;
 	}
 	
 	//determines if a position in the maze is the Goal Cell
-	protected boolean isGoalCell (int xPos, int yPos)
+	public boolean isGoalCell(int xPos, int yPos)
 	{
 		if (this.mazeMap[xPos][yPos] == GOAL_INT_INDICATOR)
 		{
@@ -173,7 +243,7 @@ public class GenericMaze
 	}
 	
 	//determines if a given position is wall. You cannot move in that cell
-	protected boolean isWallCell (int xPos, int yPos)
+	private boolean isWallCell(int xPos, int yPos)
 	{
 		if (this.mazeMap[xPos][yPos] == WALL_INT_INDICATOR)
 		{
@@ -184,7 +254,7 @@ public class GenericMaze
 	}	
 	
 	//determines if a given position is out of array bounds . You cannot move in that cell
-	protected boolean isOutOfBounds (int xPos, int yPos)
+	private boolean isOutOfBounds(int xPos, int yPos)
 	{
 		if ( yPos > this.mazeWidth-1 || xPos > this.mazeHeight-1 || xPos < 0 || yPos < 0)
 		{
@@ -195,7 +265,7 @@ public class GenericMaze
 	}
 
 	//combine more than one validations in order to define if a cell is eligible to move
-	protected boolean isValidToMove (int xPos, int yPos)
+	public boolean isValidToMove(int xPos, int yPos)
 	{
 		if (!isOutOfBounds(xPos, yPos) && !isWallCell(xPos, yPos)) //we need to put this in this order. Otherwise we get OutOfBoundsException
 		{
@@ -206,7 +276,7 @@ public class GenericMaze
 	}
 	
 	//check if starting and end position coincide
-	protected boolean startAndEndCoincide ()
+	public boolean startAndEndCoincide()
 	{
 		if ((this.startPosX == this.goalPosX+1 && this.startPosY == this.goalPosY) || (this.startPosX == this.goalPosX-1 && this.startPosY == this.goalPosY) || (this.startPosX == this.goalPosX && this.startPosY == this.goalPosY+1) || (this.startPosX == this.goalPosX && this.startPosY == this.goalPosY-1))
 		{
@@ -216,7 +286,7 @@ public class GenericMaze
 	}	
 	
 	//printing Integer maze, for class test purposes
-	public void printIntMaze ()
+	public void printIntMaze()
 	{
 		for (int i = 0; i < this.mazeMap.length; i++)
 		{
@@ -239,7 +309,7 @@ public class GenericMaze
 	}
 	
 	//print maze in "user friendly" mode, for class test purposes
-	public void printStringMaze ()
+	public void printStringMaze()
 	{
 		for (int i = 0; i < this.mazeMap.length; i++)
 		{

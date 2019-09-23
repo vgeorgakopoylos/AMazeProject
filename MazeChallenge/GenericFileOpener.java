@@ -1,10 +1,10 @@
 import java.io.*; 
 import java.util.logging.*;
 
-class GenericFileOpener
+public class GenericFileOpener
 { 
 	//function for opening files with BufferedReader
-	public BufferedReader BufferedReaderFunc(String fileFullPath) throws FileNotFoundException
+	public static BufferedReader BufferedReaderFunc(String fileFullPath) throws FileNotFoundException
 	{ 
 		GenericLog.log(Level.INFO, "GenericFileOpener.BufferedReaderFunc", "Trying Opening file:" + fileFullPath);
 		BufferedReader fileBufferReader = null;
@@ -24,7 +24,7 @@ class GenericFileOpener
 	} 
 	
 	//function for opening files with InputStream
-	public InputStream InputStreamReaderFunc(String fileFullPath)  throws FileNotFoundException
+	public static InputStream InputStreamReaderFunc(String fileFullPath)  throws FileNotFoundException
 	{ 
 		GenericLog.log(Level.INFO, "GenericFileOpener.InputStreamReaderFunc", "Trying Opening file:" + fileFullPath);
 		InputStream fileInputStreamReader = null;

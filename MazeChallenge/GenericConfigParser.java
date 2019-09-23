@@ -24,14 +24,13 @@ public class GenericConfigParser
 	
     private GenericConfigParser()
 	{
-		GenericFileOpener inputStreamLogFileObj = new GenericFileOpener();
 		String fileSeparator = System.getProperty( "file.separator" );	// get the os file seperator	
 		String configFileName = String.join(fileSeparator, ".." , CONFIG_FILE_FOLDER, CONFIG_FILE_NAME); //create the file name
 		GenericLog.log(Level.INFO, "GenericConfigParser.Constructor", "Opening Property file:" + configFileName);
 		
 		try
 		{
-			InputStream inputStreamLogFile = inputStreamLogFileObj.InputStreamReaderFunc(configFileName); //open configuration file
+			InputStream inputStreamLogFile = GenericFileOpener.InputStreamReaderFunc(configFileName); //open configuration file
 			prop.load(inputStreamLogFile);
 			GenericLog.log(Level.INFO, "GenericConfigParser.Constructor", "Property File:" + configFileName +" opened");
 		}

@@ -7,13 +7,13 @@ import java.util.logging.Level;
 public class GenericMazeInputParser 
 { 
 	
-	protected String[][] parsedMaze; //two dimensional maze after parsed the initial input arraylist maze
-	protected ArrayList<String> mazeInvalidMessages = new ArrayList<String>(); //will contain the reasons why the maze might be invalid
-	protected boolean isValid = true; //is this maze valid?
-	protected boolean isRectangle = true;//is this maze rectangle?
-	protected boolean isValidPattern = true;//does this maze pattern is valid?
-	protected Map<String, Integer> mazePatternHash = new HashMap<>(); //we want to make a pattern of distinct characters exist in input map in order to support more than one input patterns in case need. Also we need to validate if the letters used are valid
-	protected String mazePattern; // maze pattern as shorted string whithout having the count of every character within the maze
+	private String[][] parsedMaze; //two dimensional maze after parsed the initial input arraylist maze
+	private ArrayList<String> mazeInvalidMessages = new ArrayList<String>(); //will contain the reasons why the maze might be invalid
+	private boolean isValid = true; //is this maze valid?
+	private boolean isRectangle = true;//is this maze rectangle?
+	private boolean isValidPattern = true;//does this maze pattern is valid?
+	private Map<String, Integer> mazePatternHash = new HashMap<>(); //we want to make a pattern of distinct characters exist in input map in order to support more than one input patterns in case need. Also we need to validate if the letters used are valid
+	private String mazePattern; // maze pattern as shorted string whithout having the count of every character within the maze
 	
 	public static void main(String[] args) 
 	{
@@ -47,11 +47,10 @@ public class GenericMazeInputParser
 		GenericLog.printTwoDimArrString(Level.INFO, "GenericMazeInputParser.main", testArr1);
 		Map<String, Integer>  hash2 = testObject2.transformMazePatternHash();
 		GenericLog.printHashStrInt(Level.INFO, "GenericMazeInputParser.main", hash2);		
-
 	}		
 
 	//Constructor of GenericMazeInputParser
-	protected GenericMazeInputParser(ArrayList<String> inputMaze)
+	public GenericMazeInputParser(ArrayList<String> inputMaze)
 	{ 
 		GenericLog.log(Level.INFO, "GenericMazeInputParser.Constructor", "Printing input maze");
 		GenericLog.printStringlist(Level.INFO, "GenericMazeInputParser.Constructor", inputMaze);//print the input maze "straight" from the file
@@ -107,25 +106,37 @@ public class GenericMazeInputParser
 	}
 	
 	//adds a reason, for the input array , of not being valid
-	protected void setInvalidMessage(String message)
+	private void setInvalidMessage(String message)
 	{
 		this.mazeInvalidMessages.add(message);
 	}
 	
+	//adds a reason, for the input array , of not being valid
+	public ArrayList<String> getInvalidMessage()
+	{
+		return this.mazeInvalidMessages;
+	}	
+	
 	//set the boolean attribute indicates if the input array is rectangle
-	protected void setisRectangle(boolean inputVal)
+	private void setisRectangle(boolean inputVal)
 	{
 		this.isRectangle = inputVal;
 	}
 	
 	//set the boolean attribute indicates if the input array is valid overall
-	protected void setisValid(boolean inputVal)
+	private void setisValid(boolean inputVal)
 	{
 		this.isValid = inputVal;
 	}
 	
+	//geter of isValid
+	public boolean getisValid()
+	{
+		return this.isValid;
+	}	
+	
 	//appends distinct letter (contained in the input maze) and stores their count
-	protected void setMazePatternHash(String inputVal)
+	private void setMazePatternHash(String inputVal)
 	{
 		if (this.mazePatternHash.containsKey(inputVal))
 		{
@@ -138,21 +149,21 @@ public class GenericMazeInputParser
 	}
 	
 	//if the input array is not rectangle then it is not valid overall
-	protected void setInvalidRectagnle()
+	private void setInvalidRectagnle()
 	{
 		this.isRectangle = false;
 		this.isValid = false;
 	}	
 	
 	//if the input array does nto have a valid pattern then it is not valid overall
-	protected void setInvalidPattern()
+	private void setInvalidPattern()
 	{
 		this.isValidPattern = false;
 		this.isValid = false;
 	}	
 	
 	//transforms the maze pattern hash (that contains the distinct letter and their counts) to a sorted string that it is actualy the pattern identification
-	protected void setMazePattern()
+	private void setMazePattern()
 	{
 		String [] tmpArray = mazePatternHash.keySet().toArray(new String[mazePatternHash.size()]);
 		Arrays.sort(tmpArray);
@@ -161,7 +172,7 @@ public class GenericMazeInputParser
 	
 	//this function transforms an input maze to a maze that contains only the symbols GSX_
 	//we call this function after we have validated that the pattern is valid
-	protected String[][] transformMaze()
+	public String[][] transformMaze()
 	{
 		String defaultPattern = GenericConfigParser.confGetProperty("app.defaultMazePattern");
 
@@ -215,7 +226,7 @@ public class GenericMazeInputParser
 	
 	//apart the table we should transform also the pattern hash in order to use it for validations
 	//we call this function after we have validated that the pattern is valid
-	protected Map<String, Integer> transformMazePatternHash()
+	public Map<String, Integer> transformMazePatternHash()
 	{
 		String defaultPattern = GenericConfigParser.confGetProperty("app.defaultMazePattern");
 
@@ -226,11 +237,13 @@ public class GenericMazeInputParser
 		else
 		{
 			Map<String, Integer> transMazePatternHash = new HashMap<>();
-			//we first take the default maze pattern values in order we have the option to change them one day
+			//we first take the default maze pattern values (we make this configurable because one day we might want to change it)
 			String defaultStart = GenericConfigParser.confGetProperty("maze.start");
 			String defaultEnd   = GenericConfigParser.confGetProperty("maze.end");
 			String defaultWall  = GenericConfigParser.confGetProperty("maze.wall");
 			String defaultEmpty = GenericConfigParser.confGetProperty("maze.empty");		
+			
+			//get the configured mappings
 			String currentStart = GenericConfigParser.confGetProperty(this.mazePattern + "." + defaultStart);
 			String currentEnd   = GenericConfigParser.confGetProperty(this.mazePattern + "." + defaultEnd); 
 			String currentWall  = GenericConfigParser.confGetProperty(this.mazePattern + "." + defaultWall);
@@ -259,6 +272,5 @@ public class GenericMazeInputParser
 			
 			return transMazePatternHash;
 		}
-		
 	}	
 }

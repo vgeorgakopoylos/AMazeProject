@@ -16,10 +16,10 @@ public class GenericLog
 {
     private static FileHandler logFile;
 	private static ConsoleHandler logConsole;
-    private static SimpleFormatter formatterTxt;
 	private static Logger logger;
-	private static String configFileName;
 	private static String datePartName = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()).toString(); //we put this on a static variable in order to create a new file in case the date changes
+	private String configFileName;
+	private SimpleFormatter formatterTxt;
 
 	//create logging with sigleton pattern
 	public static void main(String[] args) 
@@ -54,15 +54,14 @@ public class GenericLog
 		formatterTxt = new SimpleFormatter() {
 			  private static final String format = "[%1$tF %1$tT %1$tL] [%2$-7s] %3$s %n";
 
-			  @Override
-			  public synchronized String format(LogRecord lr) {
+			@Override
+			public synchronized String format(LogRecord lr) {
 				  return String.format(format,
 						  new Date(lr.getMillis()),
 						  lr.getLevel().getLocalizedName(),
-						  lr.getMessage()
-				  );
-			  }
-		  };
+						  lr.getMessage());
+			}
+		};
 		
 		//set the formaters on both console and log file handlers
         logFile.setFormatter(formatterTxt);
@@ -131,5 +130,4 @@ public class GenericLog
 		map.forEach((key,value) -> log(level, caller, key + " = " + value));
 		log(level, caller, "-------------------------------");
 	}	
-	
 }

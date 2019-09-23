@@ -8,7 +8,6 @@ public class Main
     public static void main(String[] args)
 	{  
 	    //initiliazing variables/objects
-		GenericFileOpener bufferReaderObj;
 		BufferedReader mazesFileBuffer;
 		String currnetLine;
 		int  lineCounter = 0;
@@ -28,8 +27,7 @@ public class Main
 		try
 		{
 			//try to open the input file
-			bufferReaderObj = new GenericFileOpener();
-			mazesFileBuffer =  bufferReaderObj.BufferedReaderFunc(filename);
+			mazesFileBuffer =  GenericFileOpener.BufferedReaderFunc(filename);
 		}
 		catch(FileNotFoundException e)
 		{
@@ -79,10 +77,10 @@ public class Main
 		//Perform Generic Maze validatations.
 		//Unsupported patterns
 		//Maze that is not rectangle
-		if (!currentProcMazeObj.isValid)
+		if (!currentProcMazeObj.getisValid())
 		{
 			GenericLog.log(Level.WARNING, "Main.callActor", "Maze found INVALID due to:");
-			GenericLog.printStringlist(Level.WARNING, "Main.callActor", currentProcMazeObj.mazeInvalidMessages);//print the input maze
+			GenericLog.printStringlist(Level.WARNING, "Main.callActor", currentProcMazeObj.getInvalidMessage());//print the input maze
 			GenericLog.log(Level.WARNING, "Main.callActor", "Continue to the next maze if exists!");
 			return;
 		}
@@ -95,7 +93,7 @@ public class Main
 			RandomActor randomActor =  new RandomActor(currentProcMazeObj);
 			randomActor.runRandomPathFinding(); //create actor object
 			
-			if (randomActor.solutionFound)
+			if (randomActor.getSolutionFound())
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "--------------------------RANDOM ACTOR FOUND SOLUTION--------------------------");
 				randomActor.printPath();
@@ -122,7 +120,7 @@ public class Main
 			RankingActor rankingActor =  new RankingActor(currentProcMazeObj); //create actor object
 			rankingActor.rankingPathFinding(); //run ranking path find algorithm
 			
-			if (rankingActor.solutionFound)
+			if (rankingActor.getSolutionFound())
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "--------------------------RANKING ACTOR FOUND SOLUTION--------------------------");
 				rankingActor.printPath();
