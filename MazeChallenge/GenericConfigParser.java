@@ -7,9 +7,9 @@ import java.util.logging.Level;
 
 public class GenericConfigParser
 {
-	static final String CONFIG_FILE_FOLDER = "Config";
-	static final String CONFIG_FILE_NAME = "app.properties";
-	static final String PATTERN_PREFIX = "pattern";
+	private static final String CONFIG_FILE_FOLDER = "Config";
+	private static final String CONFIG_FILE_NAME = "app.properties";
+	private static final String PATTERN_PREFIX = "pattern";
 	
 	private static GenericConfigParser configFileInstance;
 	private static Properties prop  = new Properties();

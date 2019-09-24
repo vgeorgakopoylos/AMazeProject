@@ -45,7 +45,7 @@ public class RandomActor extends GenericActor
 			
 			GenericLog.log(Level.INFO, "RandomActor.runRandomPathFinding", "*******************************************************************");
 			GenericLog.log(Level.INFO, "RandomActor.runRandomPathFinding", "----------------------------------------------------------");				
-			printActorCurrentMaze(); //print current state of actors maze		
+			printActorCurrentMaze("RandomActor.runRandomPathFinding"); //print current state of actors maze		
 			GenericLog.log(Level.INFO, "RandomActor.runRandomPathFinding", "----------------------------------------------------------");							
 			GenericLog.log(Level.INFO, "RandomActor.runRandomPathFinding", "Coincide cells: North=" + Arrays.toString(north) + ", South=" + Arrays.toString(south) +  ", East=" + Arrays.toString(east) +   ", West=" + Arrays.toString(west));				
 			
@@ -102,7 +102,7 @@ public class RandomActor extends GenericActor
 				//this condition covers the case that the actor start in a position that has nowhere to go
 				if (prevPosX == currPosX && prevPosY == currPosY)
 				{
-					GenericLog.log(Level.INFO, "RankingActor.rankingPathFinding", "I have no move to perform!");
+					GenericLog.log(Level.INFO, "RandomActor.runRandomPathFinding", "I have no move to perform!");
 					return;
 				}
 				
@@ -119,7 +119,7 @@ public class RandomActor extends GenericActor
 					return;
 				}				
 				
-				printPath();
+				printPath("RandomActor.runRandomPathFinding");
 				
 				continue;
 			}
@@ -151,7 +151,7 @@ public class RandomActor extends GenericActor
 				return;
 			}
 			
-			printPath();
+			printPath("RandomActor.runRandomPathFinding");
 		}
 	}	
 }

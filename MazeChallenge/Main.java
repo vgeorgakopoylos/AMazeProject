@@ -96,12 +96,12 @@ public class Main
 			if (randomActor.getSolutionFound())
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "--------------------------RANDOM ACTOR FOUND SOLUTION--------------------------");
-				randomActor.printPath();
+				randomActor.printPath("Main.callActor");
 			}	
 			else
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "-----------------------------NO VALID SOLUTION-----------------------------");
-				randomActor.printPath();
+				randomActor.printPath("Main.callActor");
 			}			
 		}
 		catch(Exception e)
@@ -123,12 +123,12 @@ public class Main
 			if (rankingActor.getSolutionFound())
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "--------------------------RANKING ACTOR FOUND SOLUTION--------------------------");
-				rankingActor.printPath();
+				rankingActor.printPath("Main.callActor");
 			}
 			else
 			{
 				GenericLog.log(Level.INFO, "Main.callActor", "-----------------------------NO VALID SOLUTION-----------------------------");
-				rankingActor.printPath();
+				rankingActor.printPath("Main.callActor");
 			}
 		}
 		catch(Exception e)

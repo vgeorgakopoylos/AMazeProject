@@ -166,7 +166,7 @@ public class GenericActor
 	}	
 	
 	//print IntegerMaze with the current position, in a more "user friendly" view
-	protected void printActorCurrentMaze()
+	protected void printActorCurrentMaze(String caller)
 	{
 		for (int i = 0; i < this.mazeToPlay.getMazeHeight(); i++)
 		{
@@ -203,12 +203,12 @@ public class GenericActor
 				}
 			}
 
-			GenericLog.log(Level.INFO, "GenericActor.printActorCurrentMaze", tmpStr);
+			GenericLog.log(Level.INFO, caller, tmpStr);
 		}		
 	}	
 	
 	//prints the path the actor done at the moment called
-	protected void printPath()
+	protected void printPath(String caller)
 	{
 		int pathSize = path.size();
 		int stepCounter = 0;
@@ -224,6 +224,6 @@ public class GenericActor
 			stepCounter++;
         }
 
-		GenericLog.log(Level.INFO, "GenericActor.printPath", tmpStr);
+		GenericLog.log(Level.INFO, caller, tmpStr);
 	}	
 }

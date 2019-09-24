@@ -18,7 +18,7 @@ public class GenericMaze
 	private int goalPosY; //end position on Y AXIS of the maze table
 	private int mazeWidth; //Contains maze width. used for validation or moving
 	private int mazeHeight; //Contains maze height. used for validation or moving
-	private static int[][] mazeMap; 
+	private int[][] mazeMap; 
 	
 	public static void main(String[] args) 
 	{

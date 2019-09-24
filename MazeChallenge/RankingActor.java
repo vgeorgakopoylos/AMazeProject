@@ -47,7 +47,7 @@ public class RankingActor extends GenericActor
 			
 			GenericLog.log(Level.INFO, "RankingActor.rankingPathFinding", "*******************************************************************");
 			GenericLog.log(Level.INFO, "RankingActor.rankingPathFinding", "----------------------------------------------------------");				
-			printActorCurrentMaze(); //print current state of actors maze		
+			printActorCurrentMaze("RankingActor.rankingPathFinding"); //print current state of actors maze		
 			GenericLog.log(Level.INFO, "RankingActor.rankingPathFinding", "----------------------------------------------------------");						
 			GenericLog.log(Level.INFO, "RankingActor.rankingPathFinding", "Coincide cells: North=" + Arrays.toString(north) + ", South=" + Arrays.toString(south) +  ", East=" + Arrays.toString(east) +   ", West=" + Arrays.toString(west));	
 			
@@ -122,7 +122,7 @@ public class RankingActor extends GenericActor
 					return;
 				}	
 				
-				printPath();
+				printPath("RankingActor.rankingPathFinding");
 				
 				continue;
 			}
@@ -172,7 +172,7 @@ public class RankingActor extends GenericActor
 				return;
 			}
 			
-			printPath();
+			printPath("RankingActor.rankingPathFinding");
 		}
 	}
 	
